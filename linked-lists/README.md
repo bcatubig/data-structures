@@ -4,6 +4,8 @@
 
 ### Pros
 
+- Great for reading all items at once
+- Can be anywhere in memory
 - Like a list, but can be dynamic
 - Saves memory by only allocation memory for N items. A standard array requires you to define ahead of time how many elements you need.
 - Can live anywhere in memory. Normal arrays require blocks of contiguous memory while a linked list does not.
@@ -25,3 +27,11 @@
 
 - Every node requires extra space for a previous pointer
 - All operations require an extra pointer to be maintained
+
+## Lookups
+
+|           | Arrays | Lists  |
+| --------- | ------ | ------ |
+| Reading   | `O(1)` | `O(n)` |
+| Insertion | `O(n)` | `O(1)` |
+
