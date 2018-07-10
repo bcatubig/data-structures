@@ -19,6 +19,6 @@ test_cases = [
 ]
 
 
-@pytest.mark.parametrize("a, expected", test_cases)
-def test_fib(a, expected):
-    assert n_fib(a) == expected
+@pytest.mark.parametrize("n, expected", test_cases)
+def test_fib(n, expected):
+    assert n_fib(n) == expected
