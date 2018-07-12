@@ -43,10 +43,16 @@ def find_developer(id):
     """Find a Developer in your friend group"""
     search_queue = deque()
     search_queue.append(id)
-
+    checked_names = set()
     while search_queue:
         person = search_queue.popleft()
+
+        print(
+            f"Checking {person.name}'s friend(s): {list(friend.name for friend in person.friends)}'"
+        )
         for friend in person.friends:
+            if friend.name == id.name or friend.name in checked_names:
+                continue
             print(f"Checking {friend.name}")
             if is_a_developer(friend):
                 print(
@@ -54,8 +60,11 @@ def find_developer(id):
                 )
                 return friend
             else:
-                print(f"Adding {friend} to queue")
+                print(
+                    f"{friend.name} isn't a developer, but one of his/her friends might be!"
+                )
                 search_queue.append(friend)
+                checked_names.add(friend.name)
     return False
 
 
@@ -65,14 +74,22 @@ def main():
     joe = Person("Joe", "Security Consultant")
     jeff = Person("Jeff", "Developer")
     tom = Person("Tom", "Analyst")
+    xander = Person("Xander", "Astronaut")
 
+    brandon.friends.append(xander)
     brandon.friends.append(joe)
     brandon.friends.append(tom)
 
     tom.friends.append(jeff)
+    xander.friends.append(joe)
+
+    joe.friends.append(brandon)
 
     dev = find_developer(brandon)
-    print(f"I found {dev.name}! Maybe he can help me code a game.")
+    if dev:
+        print(f"I found {dev.name}! Maybe he/she can help me code a game.")
+    else:
+        print("Nah! Didn't find any dev friends")
 
 
 if __name__ == "__main__":
